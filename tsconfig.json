@@ -1,0 +1,39 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "typeRoots": ["./app/Types"],
+    "baseUrl": "./",
+    "paths": {
+      "app/*": ["./app/*"]
+    },
+   "target": "esnext",
+    "module": "commonjs",
+    "lib": ["es2017"],
+    "allowJs": true,
+    "jsx": "react-native",
+    "noEmit": true,
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": false,
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    ".expo",
+    ".expo-shared",
+    ".vscode",
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "webpack.config.js",
+    "jest.config.js",
+    ".eslint.config.js",
+    "node_modules",
+    "**/*.spec.ts",
+    "dist",
+    "backend",
+    "hygen"
+  ]
+}

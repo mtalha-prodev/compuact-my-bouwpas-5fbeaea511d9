@@ -1,0 +1,101 @@
+image: node:alpine
+
+definitions:
+  caches:
+    npm: ./node_modules
+    jest: .jest
+
+  steps:
+    - step: &tests
+        name: Jest and ESLint
+        caches:
+          - npm
+          - jest
+        script:
+          - apk add --no-cache bash
+          - yarn install --non-interactive
+          - bash ./deployment/lint.sh
+          - bash ./deployment/jest.sh
+    - step: &build-development-staging
+        name: EAS Build profile Development STAGING
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile development-staging --platform all --non-interactive --no-wait
+    - step: &build-development-prod
+        name: EAS Build profile Development STAGING
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile development-prod --platform all --non-interactive --no-wait
+    - step: &build-preview-staging-apk
+        name: EAS Build profile Preview STAGING APK File
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile preview-staging-apk --platform all --non-interactive --no-wait
+    - step: &build-preview-prod-apk
+        name: EAS Build profile Preview PROD APK File
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile preview-prod-apk --platform all --non-interactive --no-wait
+    - step: &build-preview-staging
+        name: EAS Build profile Preview STAGING
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile preview-staging --platform all --non-interactive --no-wait --auto-submit-with-profile=production
+    - step: &build-preview-prod
+        name: EAS Build profile Preview PROD
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile preview-prod --platform all --non-interactive --no-wait --auto-submit-with-profile=production
+    - step: &build-prod
+        name: EAS Build profile Store PRODUCTION
+        trigger: manual
+        caches:
+          - npm
+        script:
+          - yarn install --non-interactive
+          - npx eas-cli build --profile production --platform all --non-interactive --no-wait --auto-submit-with-profile=production
+
+pipelines:
+  pull-requests:
+    '**':
+      - step: *tests
+  custom:
+    eas-build-development-staging:
+      - step: *tests
+      - step: *build-development-staging
+    eas-build-development-prod:
+      - step: *tests
+      - step: *build-development-prod
+    eas-build-preview-staging-apk:
+      - step: *tests
+      - step: *build-preview-staging-apk
+    eas-build-preview-prod-apk:
+      - step: *tests
+      - step: *build-preview-prod-apk
+    eas-build-preview-staging:
+      - step: *tests
+      - step: *build-preview-staging
+    eas-build-preview-prod:
+      - step: *tests
+      - step: *build-preview-prod
+    eas-build-production:
+      - step: *tests
+      - step: *build-prod

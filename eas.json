@@ -1,0 +1,131 @@
+{
+  "cli": {
+    "version": ">= 0.34.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "fast": {
+      "resourceClass": "medium"
+    },
+    "default": {
+      "extends": "fast",
+      "env": {
+        "FONTAWESOME_TOKEN": "FONTAWESOME_TOKEN",
+        "GOOGLE_MAPS_TOKEN": "GOOGLE_MAPS_TOKEN",
+        "SENTRY_ORG": "SENTRY_ORG",
+        "SENTRY_PROJECT": "SENTRY_PROJECT",
+        "SENTRY_AUTH_TOKEN": "SENTRY_AUTH_TOKEN",
+        "SENTRY_DSN": "SENTRY_DSN"
+      }
+    },
+
+    "development-staging": {
+      "extends": "default",
+      "developmentClient": true,
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      },
+      "distribution": "internal",
+      "env": {
+        "APP_ENV_MODE": "STAGING",
+        "STAGING_CLIENT_SECRET": "STAGING_CLIENT_SECRET",
+        "STAGING_CLIENT_ID": "STAGING_CLIENT_ID"
+      }
+    },
+
+    "development-prod": {
+      "extends": "default",
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      },
+      "env": {
+        "APP_ENV_MODE": "PROD",
+        "PRODUCTION_CLIENT_SECRET": "PRODUCTION_CLIENT_SECRET",
+        "PRODUCTION_CLIENT_ID": "PRODUCTION_CLIENT_ID"
+      }
+    },
+
+    "preview-staging-apk": {
+      "extends": "default",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "APP_ENV_MODE": "STAGING",
+        "STAGING_CLIENT_SECRET": "STAGING_CLIENT_SECRET",
+        "STAGING_CLIENT_ID": "STAGING_CLIENT_ID"
+      },
+      "autoIncrement": true
+    },
+
+    "preview-prod-apk": {
+      "extends": "default",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "APP_ENV_MODE": "PROD",
+        "PRODUCTION_CLIENT_SECRET": "PRODUCTION_CLIENT_SECRET",
+        "PRODUCTION_CLIENT_ID": "PRODUCTION_CLIENT_ID"
+      },
+      "autoIncrement": true
+    },
+
+    "preview-staging": {
+      "extends": "default",
+      "env": {
+        "APP_ENV_MODE": "STAGING",
+        "STAGING_CLIENT_SECRET": "STAGING_CLIENT_SECRET",
+        "STAGING_CLIENT_ID": "STAGING_CLIENT_ID"
+      },
+      "autoIncrement": true
+    },
+
+    "preview-prod": {
+      "extends": "default",
+      "env": {
+        "APP_ENV_MODE": "PROD",
+        "PRODUCTION_CLIENT_SECRET": "PRODUCTION_CLIENT_SECRET",
+        "PRODUCTION_CLIENT_ID": "PRODUCTION_CLIENT_ID"
+      },
+      "autoIncrement": true
+    },
+
+    "production": {
+      "extends": "default",
+      "env": {
+        "APP_ENV_MODE": "PROD",
+        "PRODUCTION_CLIENT_SECRET": "PRODUCTION_CLIENT_SECRET",
+        "PRODUCTION_CLIENT_ID": "PRODUCTION_CLIENT_ID"
+      },
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "default": {
+      "ios": {
+        "ascAppId": "1536817500",
+        "appleTeamId": "5MP8T9DN74"
+      }
+    },
+    "preview-staging": {
+      "extends": "default"
+    },
+    "preview-prod": {
+      "extends": "default"
+    },
+    "production": {
+      "extends": "default"
+    }
+  }
+}
