@@ -19,7 +19,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   jsEngine: 'hermes',
   extra: {
     eas: {
-      projectId: '188abcae-9530-482d-9878-b9902fdb391b',
+      // projectId: '188abcae-9530-482d-9878-b9902fdb391b',
+      projectId: '864bf290-a00a-4f9d-9867-34490565a517',
     },
   },
   plugins: [
@@ -49,7 +50,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
   },
   android: {
-    package: 'nl.bouwpas.my',
+    // package: 'nl.bouwpas.my',
+    package: 'com.muhammadawaisash.AwesomeProject',
     permissions: [
       'LOCATION',
       'android.permission.ACCESS_COARSE_LOCATION',
